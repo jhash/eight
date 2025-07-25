@@ -1,1 +1,1 @@
-touch EXAMPLE.txt; claude-swarm --worktree EXAMPLE -p "Run './bin/rubocop -a', commit your changes to git, and open a pull request on github in draft mode when you are done." --stream-logs > EXAMPLE.txt
+touch EXAMPLE.txt; claude-swarm --worktree EXAMPLE --debug -p "Run './bin/rubocop -a', run any tests that might be related to changes you made and fix any cases that are related until all of those tests pass, commit your changes to git, open a pull request on github in draft mode, and open that pull request in my browser when you are done." --stream-logs > EXAMPLE.txt
