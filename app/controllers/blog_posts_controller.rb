@@ -21,6 +21,7 @@ class BlogPostsController < ApplicationController
   end
 
   def show
+    puts "blog_post.published?: #{@blog_post.published?}"
     unless @blog_post.published? || (logged_in? && (current_user == @blog_post.user || current_user.superadmin?))
       redirect_to blog_posts_path, alert: t("blog_posts.not_found")
       return

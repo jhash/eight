@@ -26,19 +26,17 @@
     <%= render NavbarComponent.new(current_user: current_user) %>
 
     <div class="flex min-h-screen">
-      <% if logged_in? %>
-        <!-- Mobile sidebar overlay -->
-        <div id="sidebar-overlay" 
-             class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden lg:hidden"
-             onclick="document.getElementById('sidebar-menu').classList.remove('translate-x-0'); document.getElementById('sidebar-menu').classList.add('-translate-x-full'); document.querySelector('[aria-controls=sidebar-menu]').setAttribute('aria-expanded', 'false'); this.classList.add('hidden');">
-        </div>
-        
-        <%= render SidebarComponent.new(
-          current_user: current_user, 
-          current_path: request.path,
-          sidebar_filters: content_for(:sidebar_filters)
-        ) %>
-      <% end %>
+      <!-- Mobile sidebar overlay -->
+      <div id="sidebar-overlay" 
+            class="fixed inset-0 bg-gray-900 bg-opacity-50 z-30 hidden lg:hidden"
+            onclick="document.getElementById('sidebar-menu').classList.remove('translate-x-0'); document.getElementById('sidebar-menu').classList.add('-translate-x-full'); document.querySelector('[aria-controls=sidebar-menu]').setAttribute('aria-expanded', 'false'); this.classList.add('hidden');">
+      </div>
+      
+      <%= render SidebarComponent.new(
+        current_user: current_user, 
+        current_path: request.path,
+        sidebar_filters: content_for(:sidebar_filters)
+      ) %>
       
       <main class="flex-1">
         <% if notice.present? %>

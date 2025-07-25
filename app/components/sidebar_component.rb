@@ -13,11 +13,10 @@ class SidebarComponent < ViewComponent::Base
 
   def nav_items
     items = []
+    items << { name: "Home", path: root_path, icon: "home" }
+    items << { name: "Blog", path: blog_posts_path, icon: "document-text" }
 
     if current_user
-      items << { name: "Home", path: root_path, icon: "home" }
-      items << { name: "Blog", path: blog_posts_path, icon: "document-text" }
-
       if current_user.superadmin?
         items << {
           name: "Admin",
