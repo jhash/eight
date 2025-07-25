@@ -1,0 +1,116 @@
+<article class="container mx-auto px-4 py-8 max-w-4xl">
+  <!-- Article header -->
+  <header class="mb-8">
+    <% if @blog_post.tags.any? %>
+      <div class="flex gap-2 flex-wrap mb-4">
+        <% @blog_post.tags.each do |tag| %>
+          <span class="text-xs font-semibold uppercase tracking-wider text-red-600">
+            <%= tag.name %>
+          </span>
+        <% end %>
+      </div>
+    <% end %>
+    
+    <h1 class="text-4xl md:text-5xl font-serif font-bold leading-tight mb-4">
+      <%= @blog_post.title %>
+    </h1>
+    
+    <% if @blog_post.excerpt.present? %>
+      <p class="text-xl text-gray-700 mb-6 font-serif italic">
+        <%= @blog_post.excerpt %>
+      </p>
+    <% end %>
+    
+    <div class="flex items-center text-gray-600 border-t border-b border-gray-300 py-4">
+      <div class="flex-1">
+        <div class="font-semibold text-black"><%= @blog_post.user.name %></div>
+        <time datetime="<%= @blog_post.published_at.iso8601 %>" class="text-sm">
+          <%= l(@blog_post.published_at, format: :long) %>
+        </time>
+      </div>
+      <% if @blog_post.reading_time_minutes.present? %>
+        <div class="text-sm">
+          <%= t('blog_posts.reading_time', count: @blog_post.reading_time_minutes, default: '%{count} min read') %>
+        </div>
+      <% end %>
+    </div>
+  </header>
+
+  <!-- Featured image -->
+  <% if @blog_post.featured_image_url.present? %>
+    <figure class="mb-8">
+      <%= image_tag @blog_post.featured_image_url, 
+          alt: @blog_post.featured_image_alt || @blog_post.title,
+          class: "w-full rounded-lg shadow-lg" %>
+      <% if @blog_post.featured_image_alt.present? %>
+        <figcaption class="text-sm text-gray-600 mt-2 text-center italic">
+          <%= @blog_post.featured_image_alt %>
+        </figcaption>
+      <% end %>
+    </figure>
+  <% end %>
+
+  <!-- Article content -->
+  <div class="prose prose-lg max-w-none font-serif">
+    <%= simple_format(@blog_post.content) %>
+  </div>
+
+  <!-- Article footer -->
+  <footer class="mt-12 pt-8 border-t border-gray-300">
+    <div class="flex items-center justify-between">
+      <div class="text-sm text-gray-600">
+        <%= t('blog_posts.views', count: @blog_post.views_count, default: '%{count} views') %>
+      </div>
+      
+      <% if logged_in? && (current_user == @blog_post.user || current_user.superadmin?) %>
+        <div class="flex gap-4">
+          <%= link_to t('blog_posts.edit'), "#", 
+              class: "text-blue-600 hover:underline" %>
+        </div>
+      <% end %>
+    </div>
+    
+    <!-- Back to blog link -->
+    <div class="mt-8">
+      <%= link_to blog_posts_path, class: "inline-flex items-center text-blue-600 hover:underline" do %>
+        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <%= t('blog_posts.back_to_blog', default: 'Back to Blog') %>
+      <% end %>
+    </div>
+  </footer>
+</article>
+
+<!-- Structured data for SEO -->
+<% if @blog_post.structured_data.present? %>
+  <script type="application/ld+json">
+    <%= @blog_post.structured_data.to_json.html_safe %>
+  </script>
+<% else %>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": <%= @blog_post.title.to_json.html_safe %>,
+      "description": <%= (@blog_post.excerpt || @blog_post.meta_description).to_json.html_safe %>,
+      "author": {
+        "@type": "Person",
+        "name": <%= @blog_post.user.name.to_json.html_safe %>
+      },
+      "datePublished": <%= @blog_post.published_at.iso8601.to_json.html_safe %>,
+      "dateModified": <%= @blog_post.updated_at.iso8601.to_json.html_safe %>,
+      <% if @blog_post.featured_image_url.present? %>
+      "image": <%= @blog_post.featured_image_url.to_json.html_safe %>,
+      <% end %>
+      "publisher": {
+        "@type": "Organization",
+        "name": <%= Rails.application.config.application_name.to_json.html_safe rescue "Eight".to_json.html_safe %>
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": <%= blog_post_url(@blog_post).to_json.html_safe %>
+      }
+    }
+  </script>
+<% end %>
