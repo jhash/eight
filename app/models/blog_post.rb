@@ -6,13 +6,16 @@ class BlogPost < ApplicationRecord
   # Status enum
   enum :status, { draft: 0, published: 1, archived: 2 }
 
+  # Status constants
+  PUBLISHED_STATUS = :published
+
   # Validations
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
   validates :content, presence: true
 
   # Scopes
-  scope :published, -> { where(status: :published).where("published_at <= ?", Time.current) }
+  scope :published, -> { where(status: PUBLISHED_STATUS) }
   scope :recent, -> { order(published_at: :desc) }
   scope :featured, -> { where.not(featured_image_url: nil) }
 
@@ -28,7 +31,7 @@ class BlogPost < ApplicationRecord
   end
 
   def published?
-    status == "published" && published_at.present? && published_at <= Time.current
+    status.to_sym.eql?(PUBLISHED_STATUS)
   end
 
   def increment_views!
