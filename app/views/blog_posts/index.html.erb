@@ -1,0 +1,72 @@
+<div class="container mx-auto px-4 py-8 max-w-7xl">
+  <!-- NYT-style header -->
+  <header class="border-b-4 border-black mb-8">
+    <h1 class="text-5xl font-serif font-bold mb-4"><%= t('blog_posts.index.title', default: 'The Blog') %></h1>
+    <p class="text-gray-600 mb-4"><%= t('blog_posts.index.subtitle', default: 'Latest insights and updates') %></p>
+  </header>
+
+  <!-- Blog posts grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <% @blog_posts.each_with_index do |blog_post, index| %>
+      <article class="<%= 'lg:col-span-2 lg:row-span-2' if index == 0 %> border-b pb-8 mb-8">
+        <%= link_to blog_post_path(blog_post), class: "group block" do %>
+          <% if blog_post.featured_image_url.present? %>
+            <div class="mb-4 overflow-hidden <%= index == 0 ? 'h-96' : 'h-48' %>">
+              <%= image_tag blog_post.featured_image_url, 
+                  alt: blog_post.featured_image_alt || blog_post.title,
+                  class: "w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" %>
+            </div>
+          <% end %>
+          
+          <div class="space-y-2">
+            <% if blog_post.tags.any? %>
+              <div class="flex gap-2 flex-wrap">
+                <% blog_post.tags.limit(3).each do |tag| %>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-red-600">
+                    <%= tag.name %>
+                  </span>
+                <% end %>
+              </div>
+            <% end %>
+            
+            <h2 class="text-<%= index == 0 ? '3xl' : '2xl' %> font-serif font-bold leading-tight group-hover:underline">
+              <%= blog_post.title %>
+            </h2>
+            
+            <% if blog_post.excerpt.present? %>
+              <p class="text-gray-700 <%= index == 0 ? 'text-lg' : '' %> line-clamp-3">
+                <%= blog_post.excerpt %>
+              </p>
+            <% end %>
+            
+            <div class="flex items-center text-sm text-gray-600 pt-2">
+              <span class="font-semibold"><%= blog_post.user.name %></span>
+              <span class="mx-2">·</span>
+              <time datetime="<%= blog_post.published_at.iso8601 %>">
+                <%= l(blog_post.published_at, format: :long) %>
+              </time>
+              <% if blog_post.reading_time_minutes.present? %>
+                <span class="mx-2">·</span>
+                <span><%= t('blog_posts.reading_time', count: blog_post.reading_time_minutes, default: '%{count} min read') %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+
+  <!-- Simple pagination -->
+  <% if @blog_posts.size == 9 || params[:page].to_i > 1 %>
+    <nav class="mt-12 flex justify-center space-x-2">
+      <% if params[:page].to_i > 1 %>
+        <%= link_to "← Previous", blog_posts_path(page: params[:page].to_i - 1), 
+            class: "px-4 py-2 border border-gray-300 rounded hover:bg-gray-100" %>
+      <% end %>
+      <% if @blog_posts.size == 9 %>
+        <%= link_to "Next →", blog_posts_path(page: (params[:page] || 1).to_i + 1), 
+            class: "px-4 py-2 border border-gray-300 rounded hover:bg-gray-100" %>
+      <% end %>
+    </nav>
+  <% end %>
+</div>
