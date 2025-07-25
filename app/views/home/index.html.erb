@@ -1,34 +1,14 @@
-<div class="max-w-4xl mx-auto">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold mb-8">Welcome to Eight</h1>
+<div class="max-w-6xl mx-auto">
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold mb-4">Welcome to Eight</h1>
     
     <% if logged_in? %>
-      <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+      <div class="bg-white rounded-lg shadow-md p-6 mb-8 max-w-md mx-auto">
         <h2 class="text-2xl font-semibold mb-4">Hello, <%= current_user.name %>!</h2>
-        <p class="text-gray-600 mb-4">Email: <%= current_user.email %></p>
-        
-        <div class="mb-6">
-          <h3 class="text-lg font-semibold mb-3">Connected Accounts</h3>
-          <div class="space-y-2">
-            <% ['google_oauth2', 'github'].each do |provider| %>
-              <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
-                <span class="font-medium">
-                  <%= provider == 'google_oauth2' ? 'Google' : 'GitHub' %>
-                </span>
-                <% if current_user.provider_connected?(provider) %>
-                  <span class="text-green-600 font-semibold">✓ Connected</span>
-                <% else %>
-                  <%= link_to "Connect", "/auth/#{provider}", method: :post,
-                      class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm",
-                      data: { turbo: false } %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        </div>
+        <p class="text-gray-600 mb-6">Email: <%= current_user.email %></p>
         
         <%= button_to "Sign Out", logout_path, method: :delete, 
-            class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded",
+            class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded w-full",
             data: { turbo: false } %>
       </div>
     <% else %>
@@ -60,4 +40,59 @@
       </div>
     <% end %>
   </div>
+  
+  <% if @recent_blog_posts.any? %>
+    <section class="mt-16">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-3xl font-bold">Recent Blog Posts</h2>
+        <%= link_to "View All →", blog_posts_path, class: "text-blue-600 hover:text-blue-800 font-medium" %>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% @recent_blog_posts.each do |blog_post| %>
+          <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+            <%= link_to blog_post_path(blog_post), class: "block" do %>
+              <% if blog_post.featured_image_url.present? %>
+                <div class="h-48 overflow-hidden">
+                  <%= image_tag blog_post.featured_image_url, 
+                      alt: blog_post.featured_image_alt || blog_post.title,
+                      class: "w-full h-full object-cover hover:scale-105 transition-transform duration-300" %>
+                </div>
+              <% end %>
+              
+              <div class="p-6">
+                <% if blog_post.tags.any? %>
+                  <div class="flex gap-2 mb-3">
+                    <% blog_post.tags.limit(2).each do |tag| %>
+                      <span class="text-xs font-semibold uppercase tracking-wider text-blue-600">
+                        <%= tag.name %>
+                      </span>
+                    <% end %>
+                  </div>
+                <% end %>
+                
+                <h3 class="text-xl font-semibold mb-2 hover:text-blue-600">
+                  <%= blog_post.title %>
+                </h3>
+                
+                <% if blog_post.excerpt.present? %>
+                  <p class="text-gray-600 mb-4 line-clamp-2">
+                    <%= blog_post.excerpt %>
+                  </p>
+                <% end %>
+                
+                <div class="flex items-center text-sm text-gray-500">
+                  <span><%= blog_post.user.name %></span>
+                  <span class="mx-2">·</span>
+                  <time datetime="<%= blog_post.published_at.iso8601 %>">
+                    <%= l(blog_post.published_at, format: :short) %>
+                  </time>
+                </div>
+              </div>
+            <% end %>
+          </article>
+        <% end %>
+      </div>
+    </section>
+  <% end %>
 </div>
