@@ -2,6 +2,19 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between h-16">
       <div class="flex items-center">
+        <% if current_user %>
+          <button type="button" 
+                  class="mr-3 p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 lg:hidden"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  aria-controls="sidebar-menu"
+                  onclick="document.getElementById('sidebar-menu').classList.toggle('translate-x-0'); document.getElementById('sidebar-menu').classList.toggle('-translate-x-full'); document.getElementById('sidebar-overlay').classList.toggle('hidden'); this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'false' ? 'true' : 'false')">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        <% end %>
         <%= link_to "Eight", root_path, class: "text-xl font-bold hover:text-gray-300 transition-colors" %>
       </div>
       
