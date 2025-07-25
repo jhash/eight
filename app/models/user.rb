@@ -45,7 +45,7 @@ class User < ApplicationRecord
   def remove_superadmin!
     roles.delete(Role.superadmin) if superadmin?
   end
-  
+
   # Associations
   has_many :blog_posts, dependent: :destroy
 end

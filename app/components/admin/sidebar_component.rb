@@ -13,7 +13,7 @@ class Admin::SidebarComponent < ViewComponent::Base
     base_classes = "flex items-center px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-100"
     active_classes = "bg-gray-100 text-gray-900 border-r-2 border-gray-900"
     inactive_classes = "text-gray-600"
-    
+
     is_active = current_path.start_with?(path)
     "#{base_classes} #{is_active ? active_classes : inactive_classes}"
   end

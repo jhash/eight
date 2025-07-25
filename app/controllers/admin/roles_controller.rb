@@ -46,7 +46,7 @@ class Admin::RolesController < Admin::BaseController
   end
 
   def role_params
-    permitted_attributes = Role.column_names - ["id", "created_at", "updated_at"]
+    permitted_attributes = Role.column_names - [ "id", "created_at", "updated_at" ]
     params.require(:role).permit(*permitted_attributes)
   end
 end
