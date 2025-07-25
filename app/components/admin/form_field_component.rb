@@ -16,8 +16,8 @@ class Admin::FormFieldComponent < ViewComponent::Base
     return :association if association?
     return :boolean if column&.type == :boolean
     return :text if column&.type == :text
-    return :number if [:integer, :decimal, :float].include?(column&.type)
-    return :datetime if [:datetime, :timestamp].include?(column&.type)
+    return :number if [ :integer, :decimal, :float ].include?(column&.type)
+    return :datetime if [ :datetime, :timestamp ].include?(column&.type)
     return :date if column&.type == :date
     :string
   end

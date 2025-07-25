@@ -17,7 +17,7 @@ class Admin::ModelTableComponent < ViewComponent::Base
 
   def display_value(model, attribute)
     value = model.send(attribute)
-    
+
     case value
     when ActiveSupport::TimeWithZone
       value.strftime("%Y-%m-%d %H:%M")

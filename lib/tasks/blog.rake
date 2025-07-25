@@ -6,14 +6,14 @@ namespace :blog do
       email: "admin@example.com",
       name: "Admin User"
     )
-    
+
     # Create sample tags
     tags = %w[Technology Rails Ruby Programming Web Development].map do |tag_name|
       Tag.find_or_create_by!(name: tag_name) do |tag|
         tag.slug = tag_name.parameterize
       end
     end
-    
+
     # Generate example blog post
     blog_post = BlogPost.create!(
       title: "Building Modern Web Applications with Rails #{Rails::VERSION::STRING}",
@@ -23,7 +23,7 @@ namespace :blog do
         ## Key Features in Modern Rails
 
         ### Hotwire Integration
-        
+
         Hotwire represents a paradigm shift in how we build interactive web applications. By sending HTML over the wire instead of JSON, we can create reactive user interfaces without writing much JavaScript.
 
         ```ruby
@@ -55,7 +55,7 @@ namespace :blog do
           def subscribed
             stream_from "chat_\#{params[:room_id]}"
           end
-          
+        #{'  '}
           def speak(data)
             ActionCable.server.broadcast(
               "chat_\#{params[:room_id]}",
@@ -75,7 +75,7 @@ namespace :blog do
         class OrdersController < ApplicationController
           def create
             @order = OrderService.new(order_params).process
-            
+        #{'    '}
             if @order.persisted?
               redirect_to @order, notice: 'Order was successfully created.'
             else
@@ -169,16 +169,16 @@ namespace :blog do
       published_at: 1.day.ago,
       views_count: rand(100..1000)
     )
-    
+
     # Add tags to the blog post
     blog_post.tags = tags.sample(3)
-    
+
     puts "✅ Created example blog post: #{blog_post.title}"
     puts "   URL: /blog/#{blog_post.slug}"
     puts "   Tags: #{blog_post.tags.pluck(:name).join(', ')}"
     puts "   Author: #{blog_post.user.name}"
   end
-  
+
   desc "Delete all example blog posts"
   task delete_examples: :environment do
     count = BlogPost.where("title LIKE ?", "%Building Modern Web Applications with Rails%").destroy_all.count

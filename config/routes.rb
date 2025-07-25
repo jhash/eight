@@ -13,11 +13,11 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
   delete "/logout", to: "sessions#destroy"
-  
+
   # Blog routes
-  resources :blog_posts, path: 'blog', only: [:index, :show] do
+  resources :blog_posts, path: "blog", only: [ :index, :show ] do
     collection do
-      get :feed, defaults: { format: 'rss' }
+      get :feed, defaults: { format: "rss" }
     end
   end
 

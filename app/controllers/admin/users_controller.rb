@@ -48,7 +48,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    permitted_attributes = User.column_names - ["id", "created_at", "updated_at"]
+    permitted_attributes = User.column_names - [ "id", "created_at", "updated_at" ]
     params.require(:user).permit(*permitted_attributes)
   end
 
