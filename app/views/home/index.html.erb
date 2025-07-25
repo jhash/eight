@@ -84,9 +84,11 @@
                 <div class="flex items-center text-sm text-gray-500">
                   <span><%= blog_post.user.name %></span>
                   <span class="mx-2">·</span>
-                  <time datetime="<%= blog_post.published_at.iso8601 %>">
-                    <%= l(blog_post.published_at, format: :short) %>
-                  </time>
+                  <% if blog_post.published_at.present? %>
+                    <time datetime="<%= blog_post.published_at.iso8601 %>">
+                      <%= l(blog_post.published_at, format: :short) %>
+                    </time>
+                  <% end %>
                 </div>
               </div>
             <% end %>
