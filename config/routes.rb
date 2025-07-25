@@ -14,6 +14,13 @@ Rails.application.routes.draw do
   get "/auth/failure", to: "sessions#failure"
   delete "/logout", to: "sessions#destroy"
 
+  # Admin routes
+  namespace :admin do
+    resources :users
+    resources :roles
+    root "users#index"
+  end
+
   # Defines the root path route ("/")
   root "home#index"
 end
