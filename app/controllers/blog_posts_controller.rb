@@ -2,7 +2,11 @@ class BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [ :show ]
 
   def index
-    @blog_posts = BlogPost.published.recent.includes(:user, :tags)
+    @blog_posts = if logged_in? && current_user.superadmin?
+      BlogPost.recent.includes(:user, :tags)
+    else
+      BlogPost.published.recent.includes(:user, :tags)
+    end
 
     # Simple pagination without kaminari
     page = (params[:page] || 1).to_i
