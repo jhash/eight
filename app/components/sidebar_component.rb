@@ -1,14 +1,15 @@
 # frozen_string_literal: true
 
 class SidebarComponent < ViewComponent::Base
-  def initialize(current_user:, current_path:)
+  def initialize(current_user:, current_path:, sidebar_filters: nil)
     @current_user = current_user
     @current_path = current_path
+    @sidebar_filters = sidebar_filters
   end
 
   private
 
-  attr_reader :current_user, :current_path
+  attr_reader :current_user, :current_path, :sidebar_filters
 
   def nav_items
     items = []

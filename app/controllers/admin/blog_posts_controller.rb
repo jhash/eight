@@ -1,5 +1,4 @@
 class Admin::BlogPostsController < ApplicationController
-  layout "admin"
   before_action :require_superadmin
   before_action :set_blog_post, only: [ :show, :edit, :update, :destroy ]
 
