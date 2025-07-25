@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
   delete "/logout", to: "sessions#destroy"
+  get "/sign_in", to: "sessions#new"
 
   # Settings
   get "/settings", to: "settings#index"

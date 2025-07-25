@@ -55,14 +55,8 @@
             </div>
           </div>
         <% else %>
-          <div class="flex space-x-2">
-            <%= link_to "Sign in with Google", "/auth/google_oauth2", method: :post,
-                class: "bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm transition-colors",
-                data: { turbo: false } %>
-            <%= link_to "Sign in with GitHub", "/auth/github", method: :post,
-                class: "bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded text-sm transition-colors",
-                data: { turbo: false } %>
-          </div>
+          <%= link_to "Sign in", sign_in_path,
+              class: "bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded text-sm transition-colors" %>
         <% end %>
       </div>
     </div>

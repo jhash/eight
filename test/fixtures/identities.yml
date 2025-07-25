@@ -2,10 +2,10 @@
 
 one:
   user: one
-  provider: MyString
-  uid: MyString
+  provider: google_oauth2
+  uid: uid_one
 
 two:
   user: two
-  provider: MyString
-  uid: MyString
+  provider: github
+  uid: uid_two
