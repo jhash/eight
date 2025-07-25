@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   get "/auth/failure", to: "sessions#failure"
   delete "/logout", to: "sessions#destroy"
 
+  # Settings
+  get "/settings", to: "settings#index"
+
   # Blog routes
   resources :blog_posts, path: "blog", only: [ :index, :show ] do
     collection do
@@ -25,6 +28,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
     resources :roles
+    resources :blog_posts
     root "users#index"
   end
 
