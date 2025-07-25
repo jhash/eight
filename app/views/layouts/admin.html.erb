@@ -20,7 +20,7 @@
 
   <body class="bg-gray-50">
     <div class="flex h-screen">
-      <%= render Admin::SidebarComponent.new(current_path: request.path) %>
+      <%= render Admin::SidebarComponent.new(current_path: request.path, current_user: current_user) %>
       
       <main class="flex-1 overflow-y-auto">
         <div class="px-8 py-6">
