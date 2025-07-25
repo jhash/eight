@@ -27,7 +27,11 @@
 
     <div class="flex min-h-screen">
       <% if logged_in? %>
-        <%= render SidebarComponent.new(current_user: current_user, current_path: request.path) %>
+        <%= render SidebarComponent.new(
+          current_user: current_user, 
+          current_path: request.path,
+          sidebar_filters: content_for(:sidebar_filters)
+        ) %>
       <% end %>
       
       <main class="flex-1">

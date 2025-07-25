@@ -36,9 +36,9 @@
     </nav>
   </div>
   
-  <% if content_for?(:sidebar_filters) %>
+  <% if sidebar_filters.present? %>
     <div class="px-4 py-6 border-t border-gray-700">
-      <%= yield :sidebar_filters %>
+      <%= sidebar_filters %>
     </div>
   <% end %>
 </aside>

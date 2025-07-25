@@ -1,5 +1,4 @@
 class Admin::RolesController < Admin::BaseController
-  layout "admin"
   before_action :set_role, only: %i[show edit update destroy]
 
   def index
