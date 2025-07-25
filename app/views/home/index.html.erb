@@ -5,8 +5,27 @@
     <% if logged_in? %>
       <div class="bg-white rounded-lg shadow-md p-6 mb-8">
         <h2 class="text-2xl font-semibold mb-4">Hello, <%= current_user.name %>!</h2>
-        <p class="text-gray-600 mb-2">Email: <%= current_user.email %></p>
-        <p class="text-gray-600 mb-4">Provider: <%= current_user.provider.capitalize %></p>
+        <p class="text-gray-600 mb-4">Email: <%= current_user.email %></p>
+        
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold mb-3">Connected Accounts</h3>
+          <div class="space-y-2">
+            <% ['google_oauth2', 'github'].each do |provider| %>
+              <div class="flex items-center justify-between p-3 bg-gray-50 rounded">
+                <span class="font-medium">
+                  <%= provider == 'google_oauth2' ? 'Google' : 'GitHub' %>
+                </span>
+                <% if current_user.provider_connected?(provider) %>
+                  <span class="text-green-600 font-semibold">✓ Connected</span>
+                <% else %>
+                  <%= link_to "Connect", "/auth/#{provider}", method: :post,
+                      class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-sm",
+                      data: { turbo: false } %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
         
         <%= button_to "Sign Out", logout_path, method: :delete, 
             class: "bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded",
