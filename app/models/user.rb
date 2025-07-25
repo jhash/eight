@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :identities, dependent: :destroy
-  
+  has_many :user_roles, dependent: :destroy
+  has_many :roles, through: :user_roles
+
   validates :email, presence: true, uniqueness: true
 
   def self.from_omniauth(auth)
@@ -12,23 +14,35 @@ class User < ApplicationRecord
       end
       id.user = user
     end
-    
+
     # Update user name if it's better than what we have
     if identity.user.name.blank? || identity.user.name == "User"
       identity.user.update(name: auth.info.name || auth.info.nickname || identity.user.name)
     end
-    
+
     identity.user
   rescue ActiveRecord::RecordInvalid => e
     Rails.logger.error "OAuth authentication failed: #{e.message}"
     nil
   end
-  
+
   def connected_providers
     identities.pluck(:provider)
   end
-  
+
   def provider_connected?(provider)
     identities.exists?(provider: provider)
+  end
+
+  def superadmin?
+    roles.exists?(name: Role::SUPERADMIN)
+  end
+
+  def make_superadmin!
+    roles << Role.superadmin unless superadmin?
+  end
+
+  def remove_superadmin!
+    roles.delete(Role.superadmin) if superadmin?
   end
 end

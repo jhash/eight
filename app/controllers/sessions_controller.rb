@@ -1,11 +1,11 @@
 class SessionsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"]
-    
+
     if logged_in?
       # User is already logged in, so link the new provider to their account
       identity = current_user.identities.find_or_create_by(provider: auth.provider, uid: auth.uid)
-      
+
       if identity.persisted?
         redirect_to root_path, notice: "#{auth.provider.humanize} account connected successfully!"
       else
@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     else
       # User is not logged in, so sign them in
       user = User.from_omniauth(auth)
-      
+
       if user
         session[:user_id] = user.id
         redirect_to root_path, notice: "Signed in successfully"
