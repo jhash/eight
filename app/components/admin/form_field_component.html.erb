@@ -1,0 +1,25 @@
+<div class="mb-4">
+  <%= form.label attribute, label_text, class: "block text-sm font-medium text-gray-700 mb-1" %>
+  
+  <% case field_type %>
+  <% when :boolean %>
+    <div class="flex items-center">
+      <%= form.check_box attribute, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded", disabled: readonly? %>
+      <span class="ml-2 text-sm text-gray-600">Enable <%= label_text.downcase %></span>
+    </div>
+  <% when :text %>
+    <%= form.text_area attribute, rows: 4, class: field_classes, disabled: readonly? %>
+  <% when :number %>
+    <%= form.number_field attribute, class: field_classes, disabled: readonly? %>
+  <% when :datetime %>
+    <%= form.datetime_field attribute, class: field_classes, disabled: readonly? %>
+  <% when :date %>
+    <%= form.date_field attribute, class: field_classes, disabled: readonly? %>
+  <% else %>
+    <%= form.text_field attribute, class: field_classes, disabled: readonly? %>
+  <% end %>
+  
+  <% if model.errors[attribute].any? %>
+    <p class="mt-1 text-sm text-red-600"><%= model.errors[attribute].first %></p>
+  <% end %>
+</div>

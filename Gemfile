@@ -17,6 +17,9 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# ViewComponent for component-based views
+gem "view_component", "~> 3.20"
+
 # CSS framework
 gem "tailwindcss-rails"
 
