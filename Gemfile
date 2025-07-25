@@ -17,8 +17,17 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# CSS framework
+gem "tailwindcss-rails"
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
+
+# OAuth authentication
+gem "omniauth"
+gem "omniauth-google-oauth2"
+gem "omniauth-github"
+gem "omniauth-rails_csrf_protection"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -42,7 +51,8 @@ gem "thruster", require: false
 
 # AI
 gem "activeagent"
-gem 'ruby-openai'
+gem "ruby-openai"
+gem "sublayer", "~> 0.2"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -53,6 +63,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "claude-on-rails"
 end
 
 group :development do
