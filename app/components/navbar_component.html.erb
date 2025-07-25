@@ -19,16 +19,10 @@
       </div>
       
       <div class="flex items-center space-x-4">
+        <% if content_for?(:navbar_actions) %>
+          <%= content_for(:navbar_actions) %>
+        <% end %>
         <% if current_user %>
-          <% if current_user.superadmin? %>
-            <%= link_to admin_blog_posts_path, 
-                class: "p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-colors",
-                title: "Admin Blog Posts" do %>
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
-              </svg>
-            <% end %>
-          <% end %>
           <div class="relative" data-controller="dropdown">
             <button type="button" 
                     class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white transition-colors"
