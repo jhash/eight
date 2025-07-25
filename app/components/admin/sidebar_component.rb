@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 class Admin::SidebarComponent < ViewComponent::Base
-  def initialize(current_path:)
+  def initialize(current_path:, current_user:)
     @current_path = current_path
+    @current_user = current_user
   end
 
   private
 
-  attr_reader :current_path
+  attr_reader :current_path, :current_user
 
   def nav_link_classes(path)
     base_classes = "flex items-center px-6 py-3 text-sm font-medium transition-colors hover:bg-gray-100"
