@@ -1,0 +1,20 @@
+en:
+  blog_posts:
+    index:
+      title: "The Blog"
+      subtitle: "Latest insights and updates"
+    show:
+      edit: "Edit"
+      back_to_blog: "Back to Blog"
+    not_found: "Blog post not found"
+    reading_time:
+      one: "%{count} min read"
+      other: "%{count} min read"
+    views:
+      one: "%{count} view"
+      other: "%{count} views"
+    rss:
+      title: "Blog - Eight"
+      description: "Latest blog posts from Eight"
+    atom:
+      title: "Blog - Eight"
