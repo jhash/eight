@@ -24,16 +24,27 @@ To enable Google and GitHub OAuth authentication, follow these steps:
    - Authorization callback URL: `http://localhost:3000/auth/github/callback`
 4. Copy the Client ID and Client Secret
 
-## Environment Variables
+## Rails Credentials
 
-Add the credentials to your `.env` file:
+Add the OAuth credentials to your Rails credentials file:
 
+```bash
+rails credentials:edit
 ```
-GOOGLE_CLIENT_ID=your_google_client_id_here
-GOOGLE_CLIENT_SECRET=your_google_client_secret_here
-GITHUB_CLIENT_ID=your_github_client_id_here
-GITHUB_CLIENT_SECRET=your_github_client_secret_here
+
+Then add the following structure:
+
+```yaml
+google:
+  client_id: your_google_client_id_here
+  client_secret: your_google_client_secret_here
+
+github:
+  client_id: your_github_client_id_here
+  client_secret: your_github_client_secret_here
 ```
+
+Save and close the editor. Rails will automatically encrypt the credentials.
 
 ## Running the Application
 
