@@ -8,3 +8,28 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+/* Mobile Sidebar Styles */
+#sidebar-menu {
+  width: 16rem; /* Fixed width of 16rem */
+}
+
+/* Ensure main content adjusts on desktop */
+@media (min-width: 1024px) {
+  main {
+    margin-left: 0;
+  }
+}
+
+/* Screen reader only class */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
