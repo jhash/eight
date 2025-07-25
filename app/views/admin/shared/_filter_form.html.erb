@@ -1,0 +1,12 @@
+<h3 class="text-sm font-medium text-gray-300 mb-3">Filters</h3>
+<%= form_with url: form_url, method: :get, data: { turbo_frame: "_top" } do |f| %>
+  <div class="space-y-3">
+    <%= yield f %>
+    
+    <div class="flex space-x-2">
+      <%= f.submit "Filter", class: "flex-1 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium py-1 px-3 rounded-md transition-colors" %>
+      <%= link_to "Clear", form_url, 
+          class: "flex-1 bg-gray-700 hover:bg-gray-600 text-white text-sm font-medium py-1 px-3 rounded-md transition-colors text-center" %>
+    </div>
+  </div>
+<% end %>

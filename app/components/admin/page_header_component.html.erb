@@ -1,0 +1,14 @@
+<div class="px-6 py-4 border-b border-gray-200">
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-900"><%= title %></h1>
+      <% if description.present? %>
+        <p class="mt-1 text-sm text-gray-600"><%= description %></p>
+      <% end %>
+    </div>
+    <% if action_text.present? && action_path.present? %>
+      <%= link_to action_text, action_path, 
+          class: "bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors" %>
+    <% end %>
+  </div>
+</div>
