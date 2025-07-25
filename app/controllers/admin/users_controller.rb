@@ -3,7 +3,10 @@ class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    @users = User.includes(:roles).order(created_at: :desc)
+    @users = User.includes(:roles)
+    @users = @users.where("name LIKE ?", "%#{params[:name]}%") if params[:name].present?
+    @users = @users.where("email LIKE ?", "%#{params[:email]}%") if params[:email].present?
+    @users = @users.order(created_at: :desc)
   end
 
   def show

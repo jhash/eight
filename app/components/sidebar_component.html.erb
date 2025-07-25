@@ -1,0 +1,44 @@
+<aside class="bg-gray-800 text-white w-64 min-h-screen flex flex-col" role="navigation" aria-label="Main navigation">
+  <div class="px-4 py-6">
+    <nav class="space-y-1" role="tree">
+      <% nav_items.each_with_index do |item, index| %>
+        <% if item[:children] %>
+          <details class="group" <%= "open" if any_child_active?(item[:children]) %>>
+            <summary class="flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer hover:bg-gray-700 list-none"
+                     role="treeitem"
+                     aria-expanded="<%= any_child_active?(item[:children]) ? 'true' : 'false' %>"
+                     tabindex="0">
+              <%= raw icon_svg(item[:icon]) %>
+              <span class="flex-1"><%= item[:name] %></span>
+              <svg class="ml-3 h-5 w-5 transform transition-transform group-open:rotate-90" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+              </svg>
+            </summary>
+            <div class="mt-1 ml-8" role="group">
+              <% item[:children].each do |child| %>
+                <%= link_to child[:name], child[:path],
+                    class: item_classes(child),
+                    role: "treeitem",
+                    "aria-selected": is_active?(child[:path]) ? "true" : "false" %>
+              <% end %>
+            </div>
+          </details>
+        <% else %>
+          <%= link_to item[:path],
+              class: item_classes(item),
+              role: "treeitem",
+              "aria-selected": is_active?(item[:path]) ? "true" : "false" do %>
+            <%= raw icon_svg(item[:icon]) %>
+            <%= item[:name] %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </nav>
+  </div>
+  
+  <% if content_for?(:sidebar_filters) %>
+    <div class="px-4 py-6 border-t border-gray-700">
+      <%= yield :sidebar_filters %>
+    </div>
+  <% end %>
+</aside>
