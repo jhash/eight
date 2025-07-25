@@ -37,11 +37,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.integer "views_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["published_at"], name: "index_blog_posts_on_published_at"
-    t.index ["slug"], name: "index_blog_posts_on_slug", unique: true
-    t.index ["status", "published_at"], name: "index_blog_posts_on_status_and_published_at"
-    t.index ["status"], name: "index_blog_posts_on_status"
-    t.index ["user_id"], name: "index_blog_posts_on_user_id"
+    t.index [ "published_at" ], name: "index_blog_posts_on_published_at"
+    t.index [ "slug" ], name: "index_blog_posts_on_slug", unique: true
+    t.index [ "status", "published_at" ], name: "index_blog_posts_on_status_and_published_at"
+    t.index [ "status" ], name: "index_blog_posts_on_status"
+    t.index [ "user_id" ], name: "index_blog_posts_on_user_id"
   end
 
   create_table "identities", force: :cascade do |t|
@@ -50,15 +50,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.string "uid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["provider", "uid"], name: "index_identities_on_provider_and_uid", unique: true
-    t.index ["user_id"], name: "index_identities_on_user_id"
+    t.index [ "provider", "uid" ], name: "index_identities_on_provider_and_uid", unique: true
+    t.index [ "user_id" ], name: "index_identities_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_roles_on_name", unique: true
+    t.index [ "name" ], name: "index_roles_on_name", unique: true
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -67,10 +67,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.integer "taggable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_uniqueness", unique: true
-    t.index ["tag_id"], name: "index_taggings_on_tag_id"
-    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable"
-    t.index ["taggable_type", "taggable_id"], name: "index_taggings_on_taggable_type_and_taggable_id"
+    t.index [ "tag_id", "taggable_id", "taggable_type" ], name: "index_taggings_uniqueness", unique: true
+    t.index [ "tag_id" ], name: "index_taggings_on_tag_id"
+    t.index [ "taggable_type", "taggable_id" ], name: "index_taggings_on_taggable"
+    t.index [ "taggable_type", "taggable_id" ], name: "index_taggings_on_taggable_type_and_taggable_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -78,8 +78,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["name"], name: "index_tags_on_name", unique: true
-    t.index ["slug"], name: "index_tags_on_slug", unique: true
+    t.index [ "name" ], name: "index_tags_on_name", unique: true
+    t.index [ "slug" ], name: "index_tags_on_slug", unique: true
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -87,9 +87,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.integer "role_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["role_id"], name: "index_user_roles_on_role_id"
-    t.index ["user_id", "role_id"], name: "index_user_roles_on_user_id_and_role_id", unique: true
-    t.index ["user_id"], name: "index_user_roles_on_user_id"
+    t.index [ "role_id" ], name: "index_user_roles_on_role_id"
+    t.index [ "user_id", "role_id" ], name: "index_user_roles_on_user_id_and_role_id", unique: true
+    t.index [ "user_id" ], name: "index_user_roles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,7 +97,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_25_212815) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
   end
 
   add_foreign_key "blog_posts", "users"
