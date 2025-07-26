@@ -33,6 +33,9 @@ Rails.application.routes.draw do
     root "users#index"
   end
 
+  # Test routes
+  get "/test-editor", to: "home#test_editor"
+
   # Defines the root path route ("/")
   root "home#index"
 end

@@ -9,6 +9,9 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
+/* Include compiled Tailwind CSS */
+@import "../builds/tailwind.css";
+
 /* Mobile Sidebar Styles */
 #sidebar-menu {
   width: 16rem; /* Fixed width of 16rem */

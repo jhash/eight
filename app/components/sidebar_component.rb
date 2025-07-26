@@ -35,7 +35,7 @@ class SidebarComponent < ViewComponent::Base
 
   def is_active?(path)
     return false if path.nil?
-    current_path == path || current_path.start_with?(path)
+    current_path == path || (path != root_path && current_path.start_with?(path))
   end
 
   def any_child_active?(children)
