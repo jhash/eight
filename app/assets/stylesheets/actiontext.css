@@ -438,3 +438,112 @@ trix-editor .attachment__metadata {
   padding: 0 !important;
   max-width: 100% !important;
 }
+
+/* Custom heading styles for Trix editor */
+trix-editor h1,
+.trix-content h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+trix-editor h2,
+.trix-content h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.875rem;
+}
+
+trix-editor h3,
+.trix-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+trix-editor h4,
+.trix-content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.625rem;
+}
+
+trix-editor h5,
+.trix-content h5 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+trix-editor h6,
+.trix-content h6 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+
+/* List styles with proper indentation */
+trix-editor ul,
+.trix-content ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+trix-editor ol,
+.trix-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+trix-editor li,
+.trix-content li {
+  margin-bottom: 0.25rem;
+}
+
+/* Nested list indentation */
+trix-editor ul ul,
+.trix-content ul ul {
+  list-style-type: circle;
+  margin-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+trix-editor ul ul ul,
+.trix-content ul ul ul {
+  list-style-type: square;
+}
+
+trix-editor ol ol,
+.trix-content ol ol {
+  list-style-type: lower-alpha;
+  margin-left: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+trix-editor ol ol ol,
+.trix-content ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Mixed nested lists */
+trix-editor ul ol,
+.trix-content ul ol,
+trix-editor ol ul,
+.trix-content ol ul {
+  margin-left: 1.5rem;
+  margin-top: 0.25rem;
+}
