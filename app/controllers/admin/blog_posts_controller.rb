@@ -52,7 +52,8 @@ class Admin::BlogPostsController < ApplicationController
   def blog_post_params
     params.require(:blog_post).permit(:title, :content, :status, :excerpt, :featured_image_url,
                                       :published_at, :tag_list, :meta_title, :meta_description,
-                                      :og_title, :og_description, :twitter_title, :twitter_description)
+                                      :og_title, :og_description, :twitter_title, :twitter_description,
+                                      :featured_image, content_images: [])
   end
 
   def require_superadmin

@@ -3,6 +3,10 @@ class BlogPost < ApplicationRecord
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
 
+  # Active Storage associations
+  has_one_attached :featured_image
+  has_many_attached :content_images
+
   # Status enum
   enum :status, { draft: 0, published: 1, archived: 2 }
 
