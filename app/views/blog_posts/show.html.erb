@@ -1,7 +1,7 @@
 <% content_for :navbar_actions do %>
   <% if current_user&.superadmin? %>
     <%= link_to edit_admin_blog_post_path(@blog_post), 
-        class: "p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 transition-colors",
+        class: "p-2 rounded-md text-purple-300 hover:text-white hover:bg-purple-700 transition-colors",
         title: "Edit Blog Post" do %>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
@@ -10,32 +10,32 @@
   <% end %>
 <% end %>
 
-<article class="container mx-auto px-4 py-8 max-w-4xl">
+<article class="container mx-auto px-4 py-12 max-w-3xl">
   <!-- Article header -->
   <header class="mb-8">
     <% if @blog_post.tags.any? %>
       <div class="flex gap-2 flex-wrap mb-4">
         <% @blog_post.tags.each do |tag| %>
-          <span class="text-xs font-semibold uppercase tracking-wider text-red-600">
+          <span class="text-xs font-semibold uppercase tracking-wider text-purple-600 dark:text-purple-400">
             <%= tag.name %>
           </span>
         <% end %>
       </div>
     <% end %>
     
-    <h1 class="text-4xl md:text-5xl font-serif font-bold leading-tight mb-4">
+    <h1 class="text-4xl md:text-5xl font-display font-bold leading-tight mb-6 text-gray-900 dark:text-gray-100">
       <%= @blog_post.title %>
     </h1>
     
     <% if @blog_post.excerpt.present? %>
-      <p class="text-xl text-gray-700 mb-6 font-serif italic">
+      <p class="text-xl text-gray-600 dark:text-gray-400 mb-8 font-serif leading-relaxed">
         <%= @blog_post.excerpt %>
       </p>
     <% end %>
     
-    <div class="flex items-center text-gray-600 border-t border-b border-gray-300 py-4">
+    <div class="flex items-center text-gray-600 dark:text-gray-400 border-t border-b border-gray-300 dark:border-gray-600 py-4">
       <div class="flex-1">
-        <div class="font-semibold text-black"><%= @blog_post.user.name %></div>
+        <div class="font-semibold text-black dark:text-white"><%= @blog_post.user.name %></div>
         <% if @blog_post.published_at.present? %>
           <time datetime="<%= @blog_post.published_at.iso8601 %>" class="text-sm">
             <%= l(@blog_post.published_at, format: :long) %>
@@ -57,7 +57,7 @@
           alt: @blog_post.featured_image_alt || @blog_post.title,
           class: "w-full rounded-lg shadow-lg" %>
       <% if @blog_post.featured_image_alt.present? %>
-        <figcaption class="text-sm text-gray-600 mt-2 text-center italic">
+        <figcaption class="text-sm text-gray-600 dark:text-gray-400 mt-2 text-center italic">
           <%= @blog_post.featured_image_alt %>
         </figcaption>
       <% end %>
@@ -65,21 +65,21 @@
   <% end %>
 
   <!-- Article content -->
-  <div class="prose prose-lg max-w-none font-serif prose-headings:font-serif prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-ul:list-disc prose-ol:list-decimal prose-li:marker:text-gray-600">
+  <div class="prose prose-lg dark:prose-invert max-w-none font-serif leading-relaxed prose-headings:font-display prose-headings:font-semibold prose-p:text-gray-800 dark:prose-p:text-gray-200 prose-p:leading-relaxed prose-p:mb-6 prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-h4:text-xl prose-h5:text-lg prose-h6:text-base prose-ul:list-disc prose-ol:list-decimal prose-li:marker:text-gray-600 dark:prose-li:marker:text-gray-400 prose-a:text-purple-700 dark:prose-a:text-purple-400 prose-a:underline prose-a:decoration-purple-300 dark:prose-a:decoration-purple-600 prose-blockquote:border-purple-300 dark:prose-blockquote:border-purple-700 prose-blockquote:italic prose-blockquote:font-serif">
     <%= @blog_post.content %>
   </div>
 
   <!-- Article footer -->
-  <footer class="mt-12 pt-8 border-t border-gray-300">
+  <footer class="mt-12 pt-8 border-t border-gray-300 dark:border-gray-600">
     <div class="flex items-center justify-between">
-      <div class="text-sm text-gray-600">
+      <div class="text-sm text-gray-600 dark:text-gray-400">
         <%= t('blog_posts.views', count: @blog_post.views_count, default: '%{count} views') %>
       </div>
     </div>
     
     <!-- Back to blog link -->
     <div class="mt-8">
-      <%= link_to blog_posts_path, class: "inline-flex items-center text-blue-600 hover:underline" do %>
+      <%= link_to blog_posts_path, class: "inline-flex items-center text-purple-600 dark:text-purple-400 hover:underline" do %>
         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>

@@ -1,10 +1,10 @@
-<aside id="sidebar-menu" class="bg-gray-800 text-white min-h-screen flex flex-col fixed lg:static inset-y-0 left-0 z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" role="menu" aria-label="Main navigation">
+<aside id="sidebar-menu" class="bg-purple-800 dark:bg-purple-950 text-white min-h-screen flex flex-col fixed lg:static inset-y-0 left-0 z-40 transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out" role="menu" aria-label="Main navigation">
   <div class="px-4 py-6">
     <nav class="space-y-1" role="tree">
       <% nav_items.each_with_index do |item, index| %>
         <% if item[:children] %>
           <details class="group" <%= "open" if any_child_active?(item[:children]) %>>
-            <summary class="flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer hover:bg-gray-700 list-none"
+            <summary class="flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors cursor-pointer hover:bg-purple-700 dark:hover:bg-purple-800 list-none"
                      role="treeitem"
                      aria-expanded="<%= any_child_active?(item[:children]) ? 'true' : 'false' %>"
                      tabindex="0">
@@ -37,7 +37,7 @@
   </div>
   
   <% if sidebar_filters.present? %>
-    <div class="px-4 py-6 border-t border-gray-700">
+    <div class="px-4 py-6 border-t border-purple-700 dark:border-purple-800">
       <%= sidebar_filters %>
     </div>
   <% end %>
