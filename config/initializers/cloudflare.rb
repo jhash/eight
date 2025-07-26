@@ -2,7 +2,5 @@
 # This ensures request.remote_ip returns the correct client IP
 # when requests are proxied through Cloudflare
 
-Rails.application.configure do
-  # Add Cloudflare's IP ranges to trusted proxies
-  config.cloudflare.ips = CloudflareRails::Importer.fetch_ips!
-end
+# The gem automatically fetches and caches Cloudflare's IP ranges
+# No additional configuration needed - it works out of the box!
