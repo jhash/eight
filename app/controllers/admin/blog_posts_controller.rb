@@ -3,9 +3,11 @@ class Admin::BlogPostsController < ApplicationController
   before_action :set_blog_post, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @blog_posts = BlogPost.includes(:user, :tags)
+    @blog_posts = BlogPost.includes(:user, :tags, :rich_text_content)
     @blog_posts = @blog_posts.where("title LIKE ?", "%#{params[:title]}%") if params[:title].present?
-    @blog_posts = @blog_posts.where("content LIKE ?", "%#{params[:content]}%") if params[:content].present?
+    if params[:content].present?
+      @blog_posts = @blog_posts.joins(:rich_text_content).where("action_text_rich_texts.body LIKE ?", "%#{params[:content]}%")
+    end
     @blog_posts = @blog_posts.order(created_at: :desc).page(params[:page])
   end
 

@@ -5,7 +5,7 @@ atom_feed do |feed|
   @blog_posts.each do |blog_post|
     feed.entry blog_post, published: blog_post.published_at do |entry|
       entry.title blog_post.title
-      entry.content blog_post.content, type: "html"
+      entry.content blog_post.content.to_s, type: "html"
 
       entry.author do |author|
         author.name blog_post.user.name

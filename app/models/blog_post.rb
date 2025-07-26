@@ -2,6 +2,7 @@ class BlogPost < ApplicationRecord
   belongs_to :user
   has_many :taggings, as: :taggable, dependent: :destroy
   has_many :tags, through: :taggings
+  has_rich_text :content
 
   # Active Storage associations
   has_one_attached :featured_image
@@ -16,7 +17,6 @@ class BlogPost < ApplicationRecord
   # Validations
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: true
-  validates :content, presence: true
 
   # Scopes
   scope :published, -> { where(status: PUBLISHED_STATUS) }
@@ -68,13 +68,13 @@ class BlogPost < ApplicationRecord
 
   def calculate_reading_time
     return unless content.present?
-    word_count = content.split.size
+    word_count = content.to_plain_text.split.size
     self.reading_time_minutes = (word_count / 200.0).ceil # Average reading speed: 200 words/minute
   end
 
   def set_seo_defaults
     self.meta_title ||= title
-    self.meta_description ||= excerpt || content.truncate(160)
+    self.meta_description ||= excerpt || content.to_plain_text.truncate(160) if content.present?
     self.og_title ||= meta_title
     self.og_description ||= meta_description
     self.twitter_title ||= meta_title
