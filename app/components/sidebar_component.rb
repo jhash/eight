@@ -45,9 +45,9 @@ class SidebarComponent < ViewComponent::Base
   def item_classes(item)
     base = "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors"
     if is_active?(item[:path])
-      "#{base} bg-gray-900 text-white"
+      "#{base} bg-purple-900 dark:bg-purple-800 text-white"
     else
-      "#{base} text-gray-300 hover:bg-gray-700 hover:text-white"
+      "#{base} text-purple-100 hover:bg-purple-700 dark:hover:bg-purple-800 hover:text-white"
     end
   end
 
