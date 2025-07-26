@@ -26,22 +26,22 @@ production:
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    url: <%= Rails.application.credentials.dig(:production, :database, :url) %>
+    url: <%= Rails.application.credentials.dig(:database, :url) %>
   cache:
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    url: <%= Rails.application.credentials.dig(:production, :database, :url) %>
+    url: <%= Rails.application.credentials.dig(:database, :url) %>
     migrations_paths: db/cache_migrate
   queue:
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    url: <%= Rails.application.credentials.dig(:production, :database, :url) %>
+    url: <%= Rails.application.credentials.dig(:database, :url) %>
     migrations_paths: db/queue_migrate
   cable:
     adapter: postgresql
     encoding: unicode
     pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-    url: <%= Rails.application.credentials.dig(:production, :database, :url) %>
+    url: <%= Rails.application.credentials.dig(:database, :url) %>
     migrations_paths: db/cable_migrate
