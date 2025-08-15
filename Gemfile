@@ -20,7 +20,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 # ViewComponent for component-based views
-gem "view_component", "~> 3.20"
+gem "view_component", "~> 4.0"
 
 # CSS framework
 gem "tailwindcss-rails"
