@@ -149,6 +149,8 @@ GEM
       fiber-annotation
       fiber-local (~> 1.1)
       json
+    coolhand (0.5.1)
+      base64 (~> 0.2)
     crass (1.0.6)
     csv (3.3.5)
     date (3.4.1)
@@ -595,6 +597,7 @@ DEPENDENCIES
   capybara
   claude-on-rails
   cloudflare-rails
+  coolhand
   debug
   image_processing (~> 1.2)
   importmap-rails
@@ -626,4 +629,4 @@ DEPENDENCIES
   web-console
 
 BUNDLED WITH
-   2.6.7
+   2.6.9
